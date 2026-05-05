@@ -1,0 +1,8 @@
+# SQL Instructions
+
+- Use parameterized queries only.
+- Confirm the grain of each table before writing joins or aggregations.
+- Avoid `SELECT *`; project only the columns the caller needs.
+- Document non-obvious business rules in the query, migration, or adjacent notes.
+- State source-of-truth assumptions when multiple systems or derived tables exist.
+- Prefer explicit transaction boundaries for multi-step writes.

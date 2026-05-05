@@ -1,0 +1,8 @@
+# Backend Instructions
+
+- Keep controllers, handlers, or tools thin; push business logic into services.
+- Use structured error handling with clear user-safe messages and actionable logs.
+- Prefer existing logging patterns and include identifiers that help trace requests.
+- Use `async`/`await` consistently; avoid mixed promise styles without reason.
+- Avoid unnecessary new dependencies when the standard library or repo utilities already cover the need.
+- Preserve API contracts and serialization formats unless the change explicitly includes a migration plan.

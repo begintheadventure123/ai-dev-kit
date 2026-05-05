@@ -1,0 +1,38 @@
+{
+  "name": "create-ai-dev-kit",
+  "version": "0.1.0",
+  "description": "CLI initializer for AI development instruction files for Codex, GitHub Copilot, and AI-assisted coding workflows.",
+  "type": "module",
+  "bin": {
+    "create-ai-dev-kit": "./bin/ai-dev-init.js"
+  },
+  "files": [
+    "bin",
+    "templates",
+    "docs",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "start": "node ./bin/ai-dev-init.js",
+    "dry-run": "node ./bin/ai-dev-init.js --dry-run"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "npm-init",
+    "initializer",
+    "codex",
+    "copilot",
+    "ai",
+    "developer-tools"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^12.1.0",
+    "fs-extra": "^11.2.0",
+    "handlebars": "^4.7.8",
+    "prompts": "^2.4.2"
+  }
+}

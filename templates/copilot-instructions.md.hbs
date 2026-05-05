@@ -1,0 +1,16 @@
+# GitHub Copilot Instructions
+
+## Repository Expectations
+- Match the repository's established patterns before introducing new structure.
+- Prefer targeted edits over broad rewrites.
+- Keep public APIs, schemas, contracts, and CLI behaviors stable unless the task says otherwise.
+
+## Change Discipline
+- Do not change contracts silently.
+- Reuse existing abstractions before adding new files or dependencies.
+- Keep behavior changes explicit in code comments, docs, or PR notes when they affect other contributors.
+
+## Validation Guidance
+- Add or update tests for changed behavior.
+- Run the smallest meaningful validation loop first, then broader checks.
+- Call out anything you could not validate locally.
