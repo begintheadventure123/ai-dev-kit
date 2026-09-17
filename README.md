@@ -36,6 +36,9 @@ AGENTS.md
 docs/
   ai/
     project-context.md
+    decisions.md
+    current-state.md
+    open-questions.md
     task-brief-template.md
     review-checklist.md
     verification-plan.md
@@ -49,11 +52,13 @@ Conditional files:
 - `backend.instructions.md` is generated when the stack includes a backend hint.
 - `frontend.instructions.md` is generated when the stack includes a frontend hint.
 - `tests.instructions.md` and all `docs/ai/*` files are always generated.
+- Generated path-specific instruction files include GitHub Copilot `applyTo` frontmatter.
+- Existing project knowledge files are preserved during normal and `--force` runs.
 
 ## CLI Options
 
 ```bash
-create-ai-dev-kit --project <name> --stack <comma-separated-list> --type <type> [--codex] [--copilot] [--force] [--dry-run]
+create-ai-dev-kit --project <name> --stack <comma-separated-list> --type <type> [--codex] [--copilot] [--force] [--force-context] [--dry-run]
 ```
 
 Options:
@@ -62,12 +67,14 @@ Options:
 - `--type <type>`: One of `backend`, `frontend`, `fullstack`, `mcp-server`, `data`, `library`, `other`.
 - `--codex`: Generate `AGENTS.md`.
 - `--copilot`: Generate `.github/copilot-instructions.md`.
-- `--force`: Overwrite existing files instead of skipping them.
+- `--force`: Overwrite existing generated instruction and workflow files. Existing project knowledge files remain protected.
+- `--force-context`: Also overwrite `project-context.md`, `decisions.md`, `current-state.md`, and `open-questions.md`. Requires `--force`.
 - `--dry-run`: Show what would be created without writing files.
 
 Default behavior:
 - If neither `--codex` nor `--copilot` is passed, the CLI generates both.
 - Existing files are skipped unless `--force` is used.
+- Project knowledge files require both `--force` and `--force-context` to overwrite because they are expected to accumulate repo-specific knowledge.
 - Missing directories are created automatically.
 
 ## Examples

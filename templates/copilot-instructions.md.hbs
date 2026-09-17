@@ -1,5 +1,10 @@
 # GitHub Copilot Instructions
 
+## Required Context
+- Read `docs/ai/project-context.md` before substantial implementation or architecture work.
+- Read `docs/ai/decisions.md`, `docs/ai/current-state.md`, and `docs/ai/open-questions.md` when they exist and are relevant.
+- Keep confirmed facts, accepted decisions, assumptions, proposals, unverified claims, and blockers distinct.
+
 ## Repository Expectations
 - Match the repository's established patterns before introducing new structure.
 - Prefer targeted edits over broad rewrites.
@@ -9,8 +14,11 @@
 - Do not change contracts silently.
 - Reuse existing abstractions before adding new files or dependencies.
 - Keep behavior changes explicit in code comments, docs, or PR notes when they affect other contributors.
+- Update the decision log, current state, or open questions when a change materially affects them.
+- Never convert a proposal or assumption into an accepted decision without supporting evidence.
 
 ## Validation Guidance
 - Add or update tests for changed behavior.
 - Run the smallest meaningful validation loop first, then broader checks.
 - Call out anything you could not validate locally.
+- Keep "implemented" and "verified" as separate claims.
