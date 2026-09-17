@@ -14,6 +14,12 @@
 - `docs/`: Supporting documentation
 - Add repo-specific structure notes here
 
+## Required Context
+- Before substantial work, read `docs/ai/project-context.md`.
+- Also read `docs/ai/decisions.md`, `docs/ai/current-state.md`, and `docs/ai/open-questions.md` when they exist.
+- Treat confirmed facts, accepted decisions, assumptions, proposals, unverified claims, and blockers as different states.
+- If documentation conflicts with implementation, identify the conflict before changing either one.
+
 ## Build, Run, Test, Lint
 - Build: Add the canonical build command
 - Run: Add the main local run command
@@ -26,6 +32,9 @@
 - Preserve public contracts unless the task explicitly allows contract changes.
 - Follow existing naming, layout, and dependency patterns before introducing new ones.
 - Update docs or comments when behavior or assumptions change.
+- Record accepted architectural decisions in `docs/ai/decisions.md`.
+- Keep `docs/ai/current-state.md` synchronized with meaningful implementation and verification results.
+- Do not silently answer questions recorded in `docs/ai/open-questions.md`; document the evidence or owner needed to resolve them.
 
 ## Definition Of Done
 - Behavior matches the requested outcome.
@@ -40,3 +49,4 @@
 - Preserve public contracts.
 - Add or update tests.
 - Explain assumptions and risks.
+- Distinguish implemented behavior from behavior verified in the target environment.

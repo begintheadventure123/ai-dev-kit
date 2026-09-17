@@ -15,7 +15,8 @@
   ],
   "scripts": {
     "start": "node ./bin/ai-dev-init.js",
-    "dry-run": "node ./bin/ai-dev-init.js --dry-run"
+    "dry-run": "node ./bin/ai-dev-init.js --dry-run",
+    "test": "node --test"
   },
   "engines": {
     "node": ">=18"

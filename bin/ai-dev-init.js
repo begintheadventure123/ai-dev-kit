@@ -66,6 +66,7 @@ program
   .option("--codex", "generate Codex AGENTS.md")
   .option("--copilot", "generate GitHub Copilot instructions")
   .option("--force", "overwrite existing files")
+  .option("--force-context", "overwrite existing project knowledge files; requires --force")
   .option("--dry-run", "print planned file operations without writing files")
   .parse(process.argv);
 
@@ -83,6 +84,11 @@ async function main() {
 }
 
 async function collectAnswers(options) {
+  if (options.forceContext && !options.force) {
+    console.error("--force-context requires --force.");
+    process.exit(1);
+  }
+
   const needsPrompt =
     !options.project ||
     !options.stack ||
@@ -146,6 +152,7 @@ async function collectAnswers(options) {
     stackDisplay: stack.length ? stack.join(", ") : "not specified",
     dryRun: Boolean(options.dryRun),
     force: Boolean(options.force),
+    forceContext: Boolean(options.forceContext),
     generateCodex,
     generateCopilot
   };
@@ -209,6 +216,9 @@ function buildGenerationPlan(context) {
 
   for (const name of [
     "project-context.md",
+    "decisions.md",
+    "current-state.md",
+    "open-questions.md",
     "task-brief-template.md",
     "review-checklist.md",
     "verification-plan.md",
@@ -226,8 +236,16 @@ function buildGenerationPlan(context) {
 async function writeTemplateFile(item, context) {
   const destinationPath = path.join(process.cwd(), item.destination);
   const exists = await fs.pathExists(destinationPath);
+  const protectedContextFiles = new Set([
+    path.join("docs", "ai", "project-context.md"),
+    path.join("docs", "ai", "decisions.md"),
+    path.join("docs", "ai", "current-state.md"),
+    path.join("docs", "ai", "open-questions.md")
+  ]);
+  const contextOverwriteAllowed =
+    !protectedContextFiles.has(item.destination) || context.forceContext;
 
-  if (exists && !context.force) {
+  if (exists && (!context.force || !contextOverwriteAllowed)) {
     return { status: "skipped", path: item.destination };
   }
 
@@ -309,6 +327,8 @@ function printSummary(results, context) {
     console.log("- Re-run without --dry-run to write the files.");
   } else if (!context.force) {
     console.log("- Re-run with --force if you need to overwrite existing instruction files.");
+  } else if (!context.forceContext) {
+    console.log("- Project knowledge files were preserved. Add --force-context only if replacing their contents is intentional.");
   }
 }
 
